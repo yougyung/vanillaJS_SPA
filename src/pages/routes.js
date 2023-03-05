@@ -1,8 +1,9 @@
-import mainpage from './mainpage.js';
-import subpage from './subpage.js';
+import mainPage from './mainPage.js';
+import detailPage from './detailPage.js';
+import WritePage from './writePage.js';
 
 export const routeList = [
-	{ path: '/', view: mainpage },
-	{ path: '/main', view: mainpage },
-	{ path: '/sub', view: subpage },
+	{ path: '/', view: mainPage },
+	{ path: '/new', view: WritePage },
+	{ path: '/detail', view: detailPage },
 ];
