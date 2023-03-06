@@ -1,23 +1,22 @@
+import { parseHtmlStringToElement } from '../utils/parse.js';
+
 export default class Component {
 	props;
-
 	state;
-
 	constructor(props) {
 		this.props = props;
 		this.initState();
 		this.setDefaultProps();
 	}
 
-	initState() {
-		this.state = {};
-	}
+	initState() {}
 
 	setState(newState) {
 		this.state = {
 			...this.state,
 			...newState,
 		};
+		this.render();
 	}
 
 	setDefaultProps() {
@@ -31,17 +30,13 @@ export default class Component {
 		};
 	}
 
+	render() {
+		const $app = document.querySelector('#app');
+		const $page = parseHtmlStringToElement(this.template(), true);
+		$app.replaceChildren($page);
+	}
+
+	template() {}
+
 	setEvent() {}
-
-	render(props) {
-		const html = this.template(props);
-		return html;
-	}
-
-	template() {
-		return (props) => {
-			this.setProps(props);
-			return `<div></div>`;
-		};
-	}
 }
