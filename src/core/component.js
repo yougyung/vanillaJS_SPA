@@ -16,7 +16,7 @@ export default class Component {
 			...this.state,
 			...newState,
 		};
-		this.render();
+		this.#render();
 	}
 
 	setDefaultProps() {
@@ -30,13 +30,16 @@ export default class Component {
 		};
 	}
 
-	render() {
-		const $app = document.querySelector('#app');
-		const $page = parseHtmlStringToElement(this.template(), true);
-		$app.replaceChildren($page);
-	}
-
 	template() {}
 
 	setEvent() {}
+
+	#render() {
+		console.log('rneder');
+		const $app = document.querySelector('#app');
+		const $fragment = document.createDocumentFragment();
+		$fragment.append(parseHtmlStringToElement(this.template()));
+		$app.replaceChildren($fragment);
+		this.setEvent();
+	}
 }

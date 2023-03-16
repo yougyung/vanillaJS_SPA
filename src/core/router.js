@@ -9,8 +9,8 @@ export const router = async () => {
 	document.querySelector('#app').innerHTML = await view.template();
 };
 
-export const navigate = (url) => {
-	window.history.pushState(null, null, url);
+export const navigate = (state, title, url) => {
+	window.history.pushState(state, title, url);
 	router();
 };
 
@@ -18,9 +18,5 @@ export const initialSetting = () => {
 	router();
 	document.addEventListener('DOMContentLoaded', () => {
 		window.addEventListener('popstate', router);
-		document.body.addEventListener('click', (e) => {
-			e.preventDefault();
-			navigate(e.target.href);
-		});
 	});
 };
