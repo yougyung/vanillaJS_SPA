@@ -1,9 +1,8 @@
 import Component from '../core/component.js';
 import Nav from '../components/nav.js';
-import WriteButton from '../components/writeButton.js';
+import Button from '../components/button.js';
 import Post from '../components/post.js';
 import { postAPI } from '../apis/post.js';
-import parseElementFromString from '../utils/parse.js';
 import { navigate } from '../core/router.js';
 
 export default class MainPage extends Component {
@@ -31,14 +30,23 @@ export default class MainPage extends Component {
 	template() {
 		const nav = new Nav();
 		const post = new Post();
-		const writeButton = new WriteButton();
+		const button = new Button();
 		const { postList } = this.state;
 		this.getPosts();
 		return `
 		${nav.template()}
-		${writeButton.template()}
-		${postList.map((item) => post.template(item))}
-		${postList.map((item) => post.setEvent(item))}
+		${button.template({ text: 'WRITE POST' })}
+		${postList.map((item) => post.template(item)).join('<br/>')}
 	  `;
+	}
+
+	setEvent() {
+		const nav = new Nav();
+		const post = new Post();
+		const button = new Button();
+		const { postList } = this.state;
+		nav.setEvent();
+		button.setEvent({ onClick: () => navigate(null, null, '/new') });
+		postList.map((item) => post.setEvent(item));
 	}
 }
