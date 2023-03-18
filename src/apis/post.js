@@ -5,6 +5,10 @@ export const postAPI = {
 		const { data } = await axiosInstance.get(`/posts`);
 		return data.data.posts;
 	},
+	async getPost(id) {
+		const { data } = await axiosInstance.get(`/post/${id}`);
+		return data;
+	},
 	async createPost(post) {
 		const { data } = await axiosInstance.post('/post', post);
 		return data;

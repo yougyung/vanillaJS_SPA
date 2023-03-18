@@ -1,15 +1,13 @@
 import Swal from 'sweetalert2';
 
-export const deleteAlert = async (messsage) => {
+export const alert = async (messsage) => {
 	const result = await Swal.fire({
-		width: 400,
-		height: 260,
-		showConfirmButton: false,
-		cancelButtonText: '확인',
-		cancelButtonColor: '#CF5E53',
+		title: `${messsage}`,
+		icon: 'warning',
 		showCancelButton: true,
-		timer: 3000,
-		html: `${messsage}`,
+		confirmButtonColor: '#CF5E53',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Delete',
 	});
 	return result;
 };

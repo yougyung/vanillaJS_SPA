@@ -5,18 +5,19 @@ export const router = () => {
 	let path = routeList.find((route) => {
 		return pathname.match(pathToRegex(route.path));
 	});
-	console.log(path);
 	path ? null : (path = routeList[0]);
-
 	const view = new path.view();
 	document.querySelector('#app').innerHTML = view.template();
 };
-
 const pathToRegex = (path) => new RegExp('^' + path.replace(/\//g, '\\/').replace(/:\w+/g, '(.+)') + '$');
 
 export const navigate = (state, title, url) => {
 	window.history.pushState(state, title, url);
 	router();
+};
+
+export const getUrlParam = () => {
+	return window.location.pathname.split('/')[2];
 };
 
 export const initialSetting = () => {
