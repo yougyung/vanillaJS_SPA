@@ -3,6 +3,7 @@ import { parseHtmlStringToElement } from '../utils/parse.js';
 export default class Component {
 	props;
 	state;
+
 	constructor(props) {
 		this.props = props;
 		this.initState();
@@ -35,7 +36,6 @@ export default class Component {
 	setEvent() {}
 
 	#render() {
-		console.log('rneder');
 		const $app = document.querySelector('#app');
 		const $fragment = document.createDocumentFragment();
 		$fragment.append(parseHtmlStringToElement(this.template()));

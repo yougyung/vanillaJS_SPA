@@ -4,4 +4,3 @@ export function parseHtmlStringToElement(htmlString) {
 	const $page = domParser.parseFromString(htmlString, type).body;
 	return $page;
 }
-//jsdoc

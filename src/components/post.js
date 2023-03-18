@@ -1,6 +1,5 @@
 import Component from '../core/component.js';
 import { navigate } from '../core/router.js';
-import { parseHtmlStringToElement } from '../utils/parse.js';
 
 export default class Post extends Component {
 	constructor() {
@@ -9,7 +8,7 @@ export default class Post extends Component {
 
 	template(props) {
 		if (props) this.setProps(props);
-		const { content, createdAt, image, postId, title, ipdateAt } = this.props;
+		const { content, image, postId, title } = this.props;
 		return `
    <div id="post-${postId}" class="flex rounded-2xl border cursor-pointer overflow-hidden">
    		 <img src="${image}" class="w-[100px] h-[100px]"/>
@@ -22,7 +21,8 @@ export default class Post extends Component {
 	}
 
 	setEvent(props) {
-		const $element = parseHtmlStringToElement(this.template(props), false);
-		$element.addEventListener('click', () => console.log(props.postId));
+		document
+			.getElementById(`post-${props.postId}`)
+			.addEventListener('click', () => navigate(props, null, `/post/${props.postId}`));
 	}
 }

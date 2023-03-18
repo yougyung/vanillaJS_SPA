@@ -16,7 +16,7 @@ export default class MainPage extends Component {
 		};
 	}
 
-	getPosts = async () => {
+	loadData = async () => {
 		try {
 			const data = await postAPI.getPosts();
 			if (JSON.stringify(this.state.postList) !== JSON.stringify(data)) {
@@ -32,7 +32,7 @@ export default class MainPage extends Component {
 		const post = new Post();
 		const button = new Button();
 		const { postList } = this.state;
-		this.getPosts();
+		this.loadData();
 		return `
 		${nav.template()}
 		${button.template({ text: 'WRITE POST' })}
@@ -46,7 +46,7 @@ export default class MainPage extends Component {
 		const button = new Button();
 		const { postList } = this.state;
 		nav.setEvent();
-		button.setEvent({ onClick: () => navigate(null, null, '/new') });
+		button.setEvent({ onClick: () => navigate(null, null, '/post/write') });
 		postList.map((item) => post.setEvent(item));
 	}
 }
