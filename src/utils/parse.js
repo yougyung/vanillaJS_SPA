@@ -1,3 +1,8 @@
+/**
+ * HTML문자열을 HTML요소로 변환
+ * @param {string} htmlString - HTML string
+ * @returns {HTMLElement} - HTML Element
+ */
 export function parseHtmlStringToElement(htmlString) {
 	const domParser = new DOMParser();
 	const type = 'text/html';
