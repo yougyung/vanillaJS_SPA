@@ -18,7 +18,7 @@ export default class WritePage extends Component {
 		this.state = {
 			post: {},
 			mode: null,
-			postList:[]
+			postList: [],
 		};
 	}
 
@@ -27,12 +27,12 @@ export default class WritePage extends Component {
 			//write mode
 			const data = await postAPI.getPosts();
 			if (JSON.stringify(this.state.postList) !== JSON.stringify(data)) {
-				this.setState({ postList: data, mode:mode.write });
+				this.setState({ postList: data, mode: mode.write });
 				this.loadImage();
 			}
 			//modify mode
 			if (window.history.state && JSON.stringify(window.history.state) !== JSON.stringify(this.state.post)) {
-				this.setState({ post: window.history.state, mode:mode.modify });
+				this.setState({ post: window.history.state, mode: mode.modify });
 			}
 		} catch (error) {
 			console.log(error);
@@ -40,11 +40,12 @@ export default class WritePage extends Component {
 	};
 
 	loadImage = async () => {
-		const {urls} = await imageAPI.getImage();
+		const { urls } = await imageAPI.getImage();
 		this.setState({
-				post:{
-					image:urls.full
-				}})
+			post: {
+				image: urls.full,
+			},
+		});
 	};
 
 	createPost = async () => {
@@ -53,14 +54,14 @@ export default class WritePage extends Component {
 		const date = new Date();
 		if (data.code === 201) navigate({ ...data.data, createdAt: date.toLocaleString() }, null, '/detail');
 	};
-	
+
 	updatePost = async () => {
 		this.chageInputValueToState();
 		const data = await postAPI.updatePost(this.state.post.postId, this.state.post);
 		if (data.code === 200) navigate(null, null, '/');
 	};
 
-	chageInputValueToState(){
+	chageInputValueToState() {
 		const $title = document.getElementById('title');
 		const $content = document.getElementById('content');
 		this.setState({
@@ -72,24 +73,26 @@ export default class WritePage extends Component {
 		});
 	}
 
-	validation(){
+	validation() {
 		const $title = document.getElementById('title');
 		const $content = document.getElementById('content');
 		const $image = this.state.post.image;
-		const test=[$title.value,$content.value,$image];
-		(test.find((value) => {
-				return !isValue(value);
-			})===undefined)
-			? this.state.mode ? this.createPost() : this.updatePost() 
-			: alert('작성을 완료하지 않으셨어요', false)
-		}
+		const test = [$title.value, $content.value, $image];
+		test.find((value) => {
+			return !isValue(value);
+		}) === undefined
+			? this.state.mode
+				? this.createPost()
+				: this.updatePost()
+			: alert('작성을 완료하지 않으셨어요', false);
+	}
 
 	template() {
 		const nav = new Nav();
 		const button = new Button();
 		this.loadData();
 		const { title, content, image } = this.state.post;
-		const { mode }=this.state;
+		const { mode } = this.state;
 		return `
 			${nav.template()}
     <form id="w-full post-form" class="flex flex-col gap-4">
@@ -105,7 +108,7 @@ export default class WritePage extends Component {
 			  	id ="title"
                 type="text"
                 class="text-gray-600 text-xl w-full focus:outline-none"
-				value=${mode ? '':title}
+				value=${mode ? '' : title}
               >
           </div>
           <hr class="w-full" />
@@ -113,10 +116,12 @@ export default class WritePage extends Component {
             <div>내용</div>
             <textarea
 			id ="content"
-            class="w-full text-lg text-gray-500 resize-none h-[80px] focus:outline-none">${mode?'':content}</textarea>
+            class="w-full text-lg text-gray-500 resize-none h-[80px] focus:outline-none">${
+				mode ? '' : content
+			}</textarea>
           </div>
         </div>
-		${button.template({ text: mode ? '등록하기' :'수정하기'})}
+		${button.template({ text: mode ? '등록하기' : '수정하기' })}
     </form>
 	  `;
 	}

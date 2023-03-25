@@ -5,6 +5,7 @@ import { postAPI } from '../apis/post.js';
 import editImg from '../assets/edit.png';
 import deleteImg from '../assets/delete.png';
 import { alert } from '../utils/alert.js';
+import { parseDateStringToDate } from '../utils/parse.js';
 
 export default class detailPage extends Component {
 	constructor() {
@@ -13,7 +14,9 @@ export default class detailPage extends Component {
 
 	initState() {
 		this.state = {
-			post: {},
+			post: {
+				createdAt: String(new Date()),
+			},
 		};
 	}
 
@@ -35,7 +38,7 @@ export default class detailPage extends Component {
 
 	deletePost = async () => {
 		try {
-			const result = alert('게시물을 삭제할까요?',true);
+			const result = alert('게시물을 삭제할까요?', true);
 			if (await result) {
 				await postAPI.deletePost(this.state.post.postId);
 				navigate(null, null, '/');
@@ -55,7 +58,7 @@ export default class detailPage extends Component {
 			<img src=${image} class="h-full w-full object-cover aspect-[3/2]" />
 			<div class="p-4 w-full">
 				<div class="text-2xl font-semibold my-2">${title}</div>
-				<div class="text-sm text-gray-600"">${createdAt}</div>
+				<time datetime=${createdAt} class="text-sm text-gray-600"">${parseDateStringToDate(createdAt)}</time>
 				<div class="text-md my-2">${content}</div>
 			</div>
 			<div class="flex justify-end w-full p-4" >
