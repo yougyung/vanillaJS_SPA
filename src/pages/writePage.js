@@ -55,15 +55,7 @@ export default class WritePage extends Component {
 	};
 	
 	updatePost = async () => {
-		const $title = document.getElementById('title');
-		const $content = document.getElementById('content');
-		this.setState({
-			post: {
-				...this.state.post,
-				title: $title.value,
-				content: $content.value,
-			},
-		});
+		this.chageInputValueToState();
 		const data = await postAPI.updatePost(this.state.post.postId, this.state.post);
 		if (data.code === 200) navigate(null, null, '/');
 	};
