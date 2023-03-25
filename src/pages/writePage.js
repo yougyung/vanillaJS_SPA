@@ -108,7 +108,7 @@ export default class WritePage extends Component {
 			  	id ="title"
                 type="text"
                 class="text-gray-600 text-xl w-full focus:outline-none"
-				value=${mode ? '' : title}
+				value="${mode ? '' : title}"
               >
           </div>
           <hr class="w-full" />
