@@ -52,7 +52,12 @@ module.exports = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({ template: './src/index.html' }),
-		new webpack.DefinePlugin({ 'process.env.BASE_URL': JSON.stringify(process.env.BASE_URL) }),
+		new webpack.DefinePlugin({ 
+			'process.env.BASE_URL': JSON.stringify(process.env.BASE_URL),
+			'process.env.IMAGE_URL': JSON.stringify(process.env.IMAGE_URL),
+			'process.env.IMAGE_ACCESS_KEY': JSON.stringify(process.env.IMAGE_ACCESS_KEY) ,
+		}),
+			
 		new MiniCssExtractPlugin(),
 	],
 };
