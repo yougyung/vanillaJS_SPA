@@ -1,5 +1,5 @@
 /**
- * HTML문자열을 HTML요소로 변환
+ * @brief HTML문자열을 HTML요소로 변환
  * @param {string} htmlString - HTML string
  * @returns {HTMLElement} - HTML Element
  */

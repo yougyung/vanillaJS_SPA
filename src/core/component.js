@@ -11,7 +11,11 @@ export default class Component {
 	}
 
 	initState() {}
-
+	
+	/**  
+	* @brief state의 변경을 처리하고 rerendering을 발생시킴
+	* @param { object } newState - 변경될 state
+	*/
 	setState(newState) {
 		this.state = {
 			...this.state,
@@ -35,6 +39,10 @@ export default class Component {
 
 	setEvent() {}
 
+	/** 
+	* @brief rendering
+	* @details Component를 <div id='app'></div>의 자식요소로 등록
+	*/
 	#render() {
 		const $app = document.querySelector('#app');
 		const $fragment = document.createDocumentFragment();

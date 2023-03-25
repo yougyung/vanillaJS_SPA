@@ -35,7 +35,7 @@ export default class detailPage extends Component {
 
 	deletePost = async () => {
 		try {
-			const result = alert('게시물을 삭제할까요?');
+			const result = alert('게시물을 삭제할까요?',true);
 			if (await result) {
 				await postAPI.deletePost(this.state.post.postId);
 				navigate(null, null, '/');
