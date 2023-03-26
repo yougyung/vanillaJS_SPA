@@ -1,6 +1,10 @@
-# VanillaJS로 신년 메시지 보내기 SPA 서비스
 
-#JavaScript #tailwind #yarnBerry #webpack #axios
+<br/>
+<h1 align="center" ><strong>VanillaJS로 신년 메시지 보내기 SPA 서비스</strong></h3>
+
+`#JavaScript` `#tailwind` ` #yarnBerry` `#webpack`  `#axios`
+
+<br/>
 
 ## 1. 서비스 실행
 
